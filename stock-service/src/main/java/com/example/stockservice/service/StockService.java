@@ -31,10 +31,10 @@ public class StockService {
         }
 
         List<ItemStock> stocks = repository.findByItemIdIn(itemIds);
-        if (stocks.size() != itemIds.size()) {
+/*        if (stocks.size() != itemIds.size()) {
 
             throw new StockNotFoundException("Some items are not available in stock");
-        }
+        }*/
 
         return stocks.stream().map(this::mapToResponse).toList();
     }
