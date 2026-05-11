@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-service
+  namespace: inventory-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-service
+  template:
+    metadata:
+      labels:
+        app: stock-service
+    spec:
+      containers:
+        - name: stock-service
+          image: rashmiabhay/stock-service:1.0
+          ports:
+            - containerPort: 8081

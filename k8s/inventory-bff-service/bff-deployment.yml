@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: inventory-bff-service
+  namespace: inventory-platform
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: inventory-bff-service
+
+  template:
+    metadata:
+      labels:
+        app: inventory-bff-service
+
+    spec:
+      containers:
+        - name: inventory-bff-service
+
+          image: rashmiabhay/inventory-bff-service:1.0
+
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8082

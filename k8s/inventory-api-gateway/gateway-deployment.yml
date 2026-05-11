@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-api-gateway
+  namespace: inventory-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inventory-api-gateway
+  template:
+    metadata:
+      labels:
+        app: inventory-api-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: rashmiabhay/inventory-api-gateway:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9090
