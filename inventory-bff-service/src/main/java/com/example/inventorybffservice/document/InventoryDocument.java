@@ -1,15 +1,18 @@
 package com.example.inventorybffservice.document;
 
-/*import lombok.Data;
+import lombok.Data;
+import org.springframework.core.serializer.Serializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.io.Serializable;
+
 @Data
 
-@Document(indexName = "inventory")*/
-public class InventoryDocument {
+@Document(indexName = "inventory")
+public class InventoryDocument implements Serializable {
 
-   /* @Id
+    @Id
     private String itemId;
 
     private String name;
@@ -20,5 +23,5 @@ public class InventoryDocument {
 
     private Integer availableStock;
 
-    private Integer reservedStock;*/
+    private Integer reservedStock;
 }

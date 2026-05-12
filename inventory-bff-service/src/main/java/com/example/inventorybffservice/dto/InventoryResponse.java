@@ -3,9 +3,11 @@ package com.example.inventorybffservice.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Builder
-public class InventoryResponse {
+public class InventoryResponse implements Serializable {
 
     private String itemId;
     private String name;

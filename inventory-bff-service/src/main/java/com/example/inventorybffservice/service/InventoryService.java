@@ -11,6 +11,7 @@ import com.example.inventorybffservice.exception.StockServiceUnavailableExceptio
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,9 @@ public class InventoryService {
 
     private final StockClient stockClient;
 
+    @Cacheable(value = "inventoryCache")
     public List<InventoryResponse> getInventory() {
-
+        log.info("Fetching inventory from downstream services");
         List<ItemResponse> items;
 
         try {
