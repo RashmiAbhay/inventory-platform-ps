@@ -2,14 +2,20 @@ package com.example.searchindexer.consumer;
 
 import com.example.searchindexer.document.InventoryDocument;
 import com.example.searchindexer.event.StockEvent;
+import com.example.searchindexer.exception.StockEventProcessingException;
 import com.example.searchindexer.repository.InventoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
+
 import org.slf4j.MDC;
+
 import org.springframework.kafka.annotation.KafkaListener;
+
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -61,7 +67,7 @@ public class StockEventConsumer {
 
             log.error("Error while processing stock event", ex);
 
-            throw ex;
+            throw new StockEventProcessingException("Failed to process stock event", ex);
 
         } finally {
 

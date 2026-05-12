@@ -2,14 +2,20 @@ package com.example.searchindexer.consumer;
 
 import com.example.searchindexer.document.InventoryDocument;
 import com.example.searchindexer.event.ItemEvent;
+import com.example.searchindexer.exception.ItemEventProcessingException;
 import com.example.searchindexer.repository.InventoryRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.header.Header;
+
 import org.slf4j.MDC;
+
 import org.springframework.kafka.annotation.KafkaListener;
+
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -20,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 public class ItemEventConsumer {
 
     private static final String CORRELATION_ID = "X-Correlation-ID";
+
     private final InventoryRepository repository;
 
     private final ObjectMapper objectMapper;
@@ -62,7 +69,7 @@ public class ItemEventConsumer {
 
             log.error("Error while processing item event", ex);
 
-            throw ex;
+            throw new ItemEventProcessingException("Failed to process item event", ex);
 
         } finally {
 
